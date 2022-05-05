@@ -7,7 +7,7 @@ public class Contato extends Pessoa {
     }    
     
     public void setNumero(String numero){
-        this.numero = numero;
+            this.numero = numero;
     }
     
     public String getNumero(){
