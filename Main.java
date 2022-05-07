@@ -1,9 +1,23 @@
 import java.util.Scanner;
 import java.util.Map;
+import java.util.HashMap;
+import java.util.*;
+
+
+
 
 public class Main {
     public static void main(String[] args) {
         Agenda agenda = new Agenda();
+
+        Contato  contato1 = new Contato( "pedr" , "lari" , "86534646454" );
+        Contato  contato2 = new Contato( "laru" , "jhgh" , "86534646454" );
+        Contato  contato3 = new Contato( "eduarda" , "jhgh" , "86534646454" );
+        agenda.adicionarContato(contato1);
+        agenda.adicionarContato(contato2);
+        agenda.adicionarContato(contato3);
+        agenda.exibirContatos();
+
         Validador validador = new Validador(); 
         Scanner input = new Scanner(System.in);
         String entrada = "default";
@@ -34,15 +48,17 @@ public class Main {
                 }
                 Contato contato = new Contato(nome, sobrenome, numero);
                 agenda.adicionarContato(contato);
-                System.out.println(agenda.getContatos());
+                agenda.exibirContatos();
                 System.out.println("Contato adicionado com sucessso!");
             }
             else if (entrada.equals("2")){
                 String nomeEditado, sobrenomeEditado, numeroEditado;
 
-                System.out.println(agenda.getContatos());
+                agenda.exibirContatos();
                 System.out.println("Selcione qual contato gostaria de editar:");
-                Integer id = input.nextInt();
+                Integer indice = input.nextInt();
+                Contato contato = agenda.getContatos().get(indice -1);
+
                 while (true){
                     System.out.println("Digite o nome:");
                     nomeEditado = input.next();
@@ -61,16 +77,17 @@ public class Main {
                     if (validador.ehNumeroValido(numeroEditado)) break;
                     else System.out.println("Formato invalido!");
                 }
-                agenda.editarContato(id, nomeEditado, sobrenomeEditado, numeroEditado);
-                System.out.println(agenda.getContatos());
+                agenda.editarContato(contato.getId(), nomeEditado, sobrenomeEditado, numeroEditado);
+                agenda.exibirContatos();
                 System.out.println("Contato editado com sucessso!");
             }
             else if (entrada.equals("3")){
-                System.out.println(agenda.getContatos());
+                agenda.exibirContatos();
                 System.out.println("Selecione qual o número do contato que gostaria de excluir:");
-                Integer id = input.nextInt();
-                agenda.removerContato(id);
-                System.out.println(agenda.getContatos());
+                Integer indice = input.nextInt();
+                Contato contato = agenda.getContatos().get(indice -1);
+                agenda.removerContato(contato.getId());
+                agenda.exibirContatos();
                 System.out.println("Contato removido com sucesso!");
             }
             else if (entrada.equals("4")){
@@ -79,12 +96,10 @@ public class Main {
                 else
                 {
                     System.out.println("Sua lista de contatos: ");
-                    for (Map.Entry<Integer, Contato> elemento: agenda.getContatos().entrySet()){
-                        System.out.println(elemento.getValue().getNome() + " - "
-                               + elemento.getValue().getNumero());
-                    }
-                }              
+                    agenda.exibirContatos();
+                }
             }
+            
         }
         input.close();
     }
