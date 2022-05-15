@@ -3,21 +3,9 @@ import java.util.Map;
 import java.util.HashMap;
 import java.util.*;
 
-
-
-
 public class Main {
     public static void main(String[] args) {
         Agenda agenda = new Agenda();
-
-        Contato  contato1 = new Contato( "pedr" , "lari" , "86534646454" );
-        Contato  contato2 = new Contato( "laru" , "jhgh" , "86534646454" );
-        Contato  contato3 = new Contato( "eduarda" , "jhgh" , "86534646454" );
-        agenda.adicionarContato(contato1);
-        agenda.adicionarContato(contato2);
-        agenda.adicionarContato(contato3);
-        agenda.exibirContatos();
-
         Validador validador = new Validador(); 
         Scanner input = new Scanner(System.in);
         String entrada = "default";
